@@ -1,10 +1,26 @@
+import { useEffect, useState } from "react";
 import Arrow from "./arrow.svg";
 import Window from "./window.svg";
-import Rotating from "./rotating.svg";
 
 const darkColor = "rgba(255,255,255,0.5)";
 
 function App() {
+  const [track, setTrack] = useState(null);
+
+  useEffect(() => {
+    fetch(
+      `${
+        process.env.NODE_ENV === "production"
+          ? "https://sulley-porfolio-api.vercel.app/api/currently-playing"
+          : "http://localhost:3005"
+      }/api/currently-playing`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setTrack(data);
+      });
+  }, []);
+
   return (
     <div
       className="flex flex-col justify-between p-10"
@@ -13,8 +29,8 @@ function App() {
       }}
     >
       <div className="text-white">
-        <div>Suleiman Zakari Mohammed</div>
-        <div>
+        <p>Suleiman Zakari Mohammed</p>
+        <p>
           I’m currently experimenting with calendars at{" "}
           <a
             className="underline"
@@ -24,8 +40,8 @@ function App() {
           >
             Daybridge
           </a>
-        </div>
-        <div>
+        </p>
+        <p>
           <span
             className=""
             style={{
@@ -35,7 +51,7 @@ function App() {
             Based in
           </span>{" "}
           Birmingham, United Kingdom.
-        </div>
+        </p>
       </div>
       <div className="text-white">
         <div className="">
@@ -45,18 +61,24 @@ function App() {
               color: darkColor,
             }}
           >
-            <span className="rotating mx-2"></span>
+            <span
+              className={`${
+                track?.isPlaying ? "rotating" : ""
+              } playing-icon mx-2`}
+            ></span>
             <span className="" style={{ marginLeft: "0.4rem" }}>
               Listening to
             </span>
           </div>
           <a
             className="flex items-center"
-            href="http://google.com"
+            href={track?.songUrl}
             target="_blank"
             rel="noreferrer"
           >
-            <span>No Halo by Brockhampton</span>{" "}
+            <span>
+              {track ? `${track?.title} by ${track?.artist}` : "Loading"}
+            </span>{" "}
             <img src={Window} alt="window icon" className="w-3 mx-2" />
           </a>
         </div>
