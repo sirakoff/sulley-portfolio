@@ -11,7 +11,7 @@ function App() {
     fetch(
       `${
         process.env.NODE_ENV === "production"
-          ? "https://sulley-porfolio-api.vercel.app/api/currently-playing"
+          ? "https://sulley-porfolio-api.vercel.app"
           : "http://localhost:3005"
       }/api/currently-playing`
     )
