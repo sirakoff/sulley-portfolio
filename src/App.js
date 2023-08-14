@@ -38,7 +38,7 @@ function App() {
             rel="noreferrer"
           >
             Lens
-          </a>. {" "} Previously:
+          </a>. {" "} Previously:{" "}
           <a
             className="underline"
             href="https://www.daybridge.com/"
