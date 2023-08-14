@@ -31,7 +31,14 @@ function App() {
       <div className="text-white">
         <p>Suleiman Zakari Mohammed</p>
         <p>
-          I’m currently experimenting with calendars at{" "}
+          I’m currently experimenting with the new internet at <a
+            className="underline"
+            href="https://www.lens.xyz/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Lens
+          </a>. {" "} Previously:
           <a
             className="underline"
             href="https://www.daybridge.com/"
